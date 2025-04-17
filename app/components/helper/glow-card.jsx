@@ -1,8 +1,13 @@
-"use client"
-import { useEffect } from 'react';
+"use client"; // Ensure this file is treated as a client component
 
-const GlowCard = ({ children , identifier}) => {
+import { useEffect, useState } from "react";
+
+const GlowCard = ({ children, identifier }) => {
+  const [isClient, setIsClient] = useState(false);
+
   useEffect(() => {
+    setIsClient(true); // This ensures that we are on the client side
+
     const CONTAINER = document.querySelector(`.glow-container-${identifier}`);
     const CARDS = document.querySelectorAll(`.glow-card-${identifier}`);
 
@@ -66,6 +71,10 @@ const GlowCard = ({ children , identifier}) => {
       document.body.removeEventListener('pointermove', UPDATE);
     };
   }, [identifier]);
+
+  if (!isClient) {
+    return null; // Render nothing on the server side
+  }
 
   return (
     <div className={`glow-container-${identifier} glow-container`}>

@@ -1,17 +1,19 @@
-// @flow strict
+"use client";
 
+import { useState } from "react";
 import { personalData } from "@/utils/data/personal-data";
 import Image from "next/image";
 
-
 function AboutSection() {
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
     <div id="about" className="my-12 lg:my-16 relative">
-      <div className="hidden lg:flex flex-col items-center absolute top-16 -right-8">
-        <span className="bg-[#1a1443] w-fit text-white rotate-90 p-2 px-5 text-xl rounded-md">
+      <div className="hidden lg:flex flex-col items-center absolute top-1/3 -right-24">
+        <span className="bg-[#1a1443] w-fit text-white rotate-90 p-2 px-5 text-xl rounded-md mb-4 z-10">
           ABOUT ME
         </span>
-        <span className="h-36 w-[2px] bg-[#1a1443]"></span>
+        <span className="h-48 w-[2px] bg-[#1a1443]"></span>
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
         <div className="order-2 lg:order-1">
@@ -23,17 +25,26 @@ function AboutSection() {
           </p>
         </div>
         <div className="flex justify-center order-1 lg:order-2">
-          <Image
-            src={personalData.profile}
-            width={280}
-            height={280}
-            alt="Abu Said"
-            className="rounded-lg transition-all duration-1000 grayscale hover:grayscale-0 hover:scale-110 cursor-pointer"
-          />
+          <div
+            className="w-[280px] h-[280px] lg:w-[400px] lg:h-[400px] rounded-full overflow-hidden transition-all duration-1000 hover:scale-110 cursor-pointer"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            <Image
+              src={personalData.profile}
+              width={400}
+              height={400}
+              alt="Saqib Ur Rehman"
+              className="w-full h-full object-cover transition-all duration-500"
+              style={{
+                filter: isHovered ? "grayscale(0%)" : "grayscale(50%)",
+              }}
+            />
+          </div>
         </div>
       </div>
     </div>
   );
-};
+}
 
 export default AboutSection;

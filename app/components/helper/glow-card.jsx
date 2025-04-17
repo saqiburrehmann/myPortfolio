@@ -1,12 +1,10 @@
-"use client"; // Ensure this file is treated as a client component
+"use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 const GlowCard = ({ children, identifier }) => {
-  const [isClient, setIsClient] = useState(false);
-
   useEffect(() => {
-    setIsClient(true); // This ensures that the component only mounts on the client-side
+    if (typeof window === "undefined") return;
 
     const CONTAINER = document.querySelector(`.glow-container-${identifier}`);
     const CARDS = document.querySelectorAll(`.glow-card-${identifier}`);
@@ -21,61 +19,53 @@ const GlowCard = ({ children, identifier }) => {
     };
 
     const UPDATE = (event) => {
+      // Add null check for event
+      if (!event) return;
+
+      // Use clientX/clientY instead of x/y
+      const mouseX = event.clientX || 0;
+      const mouseY = event.clientY || 0;
+
       for (const CARD of CARDS) {
         const CARD_BOUNDS = CARD.getBoundingClientRect();
+        
+        const isHovered = (
+          mouseX > CARD_BOUNDS.left - CONFIG.proximity &&
+          mouseX < CARD_BOUNDS.left + CARD_BOUNDS.width + CONFIG.proximity &&
+          mouseY > CARD_BOUNDS.top - CONFIG.proximity &&
+          mouseY < CARD_BOUNDS.top + CARD_BOUNDS.height + CONFIG.proximity
+        );
 
-        if (
-          event?.x > CARD_BOUNDS.left - CONFIG.proximity &&
-          event?.x < CARD_BOUNDS.left + CARD_BOUNDS.width + CONFIG.proximity &&
-          event?.y > CARD_BOUNDS.top - CONFIG.proximity &&
-          event?.y < CARD_BOUNDS.top + CARD_BOUNDS.height + CONFIG.proximity
-        ) {
-          CARD.style.setProperty('--active', 1);
-        } else {
-          CARD.style.setProperty('--active', CONFIG.opacity);
-        }
+        CARD.style.setProperty("--active", isHovered ? 1 : CONFIG.opacity);
 
         const CARD_CENTER = [
           CARD_BOUNDS.left + CARD_BOUNDS.width * 0.5,
           CARD_BOUNDS.top + CARD_BOUNDS.height * 0.5,
         ];
 
-        let ANGLE =
-          (Math.atan2(event?.y - CARD_CENTER[1], event?.x - CARD_CENTER[0]) *
-            180) /
-          Math.PI;
-
+        let ANGLE = (Math.atan2(mouseY - CARD_CENTER[1], mouseX - CARD_CENTER[0]) * 180) / Math.PI;
         ANGLE = ANGLE < 0 ? ANGLE + 360 : ANGLE;
-
-        CARD.style.setProperty('--start', ANGLE + 90);
+        CARD.style.setProperty("--start", ANGLE + 90);
       }
     };
 
-    document.body.addEventListener('pointermove', UPDATE);
-
     const RESTYLE = () => {
-      CONTAINER.style.setProperty('--gap', CONFIG.gap);
-      CONTAINER.style.setProperty('--blur', CONFIG.blur);
-      CONTAINER.style.setProperty('--spread', CONFIG.spread);
-      CONTAINER.style.setProperty(
-        '--direction',
-        CONFIG.vertical ? 'column' : 'row'
-      );
+      CONTAINER.style.setProperty("--gap", CONFIG.gap);
+      CONTAINER.style.setProperty("--blur", CONFIG.blur);
+      CONTAINER.style.setProperty("--spread", CONFIG.spread);
+      CONTAINER.style.setProperty("--direction", CONFIG.vertical ? "column" : "row");
     };
 
+    document.body.addEventListener("pointermove", UPDATE);
     RESTYLE();
-    UPDATE();
 
-    // Cleanup event listener
+    // Initialize with default position
+    UPDATE({ clientX: 0, clientY: 0 });
+
     return () => {
-      document.body.removeEventListener('pointermove', UPDATE);
+      document.body.removeEventListener("pointermove", UPDATE);
     };
   }, [identifier]);
-
-  // Return null or render loading state until client-side is ready
-  if (!isClient) {
-    return null;
-  }
 
   return (
     <div className={`glow-container-${identifier} glow-container`}>

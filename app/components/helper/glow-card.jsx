@@ -6,7 +6,7 @@ const GlowCard = ({ children, identifier }) => {
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    setIsClient(true); // This ensures that we are on the client side
+    setIsClient(true); // This ensures that the component only mounts on the client-side
 
     const CONTAINER = document.querySelector(`.glow-container-${identifier}`);
     const CARDS = document.querySelectorAll(`.glow-card-${identifier}`);
@@ -72,8 +72,9 @@ const GlowCard = ({ children, identifier }) => {
     };
   }, [identifier]);
 
+  // Return null or render loading state until client-side is ready
   if (!isClient) {
-    return null; // Render nothing on the server side
+    return null;
   }
 
   return (

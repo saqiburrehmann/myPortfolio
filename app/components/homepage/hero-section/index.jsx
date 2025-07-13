@@ -9,7 +9,6 @@ import { MdDownload } from "react-icons/md";
 import { RiContactsFill } from "react-icons/ri";
 import { SiInstagram } from "react-icons/si";
 
-
 function HeroSection() {
   return (
     <section className="relative flex flex-col items-center justify-between py-4 lg:py-12">
@@ -23,13 +22,12 @@ function HeroSection() {
 
       <div className="grid grid-cols-1 items-start lg:grid-cols-2 lg:gap-12 gap-y-8">
         <div className="order-2 lg:order-1 flex flex-col items-start justify-center p-2 pb-20 md:pb-10 lg:pt-4">
-          <h1 className="text-3xl font-bold leading-10 text-[#e5e7eb] md:font-extrabold lg:text-[2.2rem] lg:leading-[3.5rem]">
-            Hi, I’m <span className="text-pink-500">{personalData.name}</span>,
-            <br />a passionate{" "}
-            <span className="text-[#16f2b3]">MERN Stack Developer </span>
-            {/* <br /> */}
-            who loves building modern web apps.
-          </h1>
+         <h1 className="w-full max-w-2xl text-left text-3xl font-bold leading-10 text-[#e5e7eb] md:font-extrabold lg:text-[2.2rem] lg:leading-[3.5rem] px-2 sm:px-4">
+  Hi, I’m <span className="text-pink-500">{personalData.name}</span>,<br />
+  a passionate <span className="text-[#16f2b3]">Full-Stack Software Engineer</span><br />
+  who builds scalable and real-time web applications.
+</h1>
+
 
           <div className="my-12 flex items-center gap-5">
             <Link
@@ -119,16 +117,38 @@ function HeroSection() {
                 <span className="text-gray-400">{`',`}</span>
               </div>
               <div className="ml-4 lg:ml-8 mr-2">
-                <span className=" text-[#e5e7eb]">skills:</span>
+                <span className="text-[#e5e7eb]">skills:</span>
                 <span className="text-gray-400">{`['`}</span>
-                <span className="text-amber-300">React</span>
+                <span className="text-amber-300">React.js</span>
+                <span className="text-gray-400">{"', '"}</span>
+                <span className="text-amber-300">Next.js</span>
                 <span className="text-gray-400">{"', '"}</span>
                 <span className="text-amber-300">Node.js</span>
                 <span className="text-gray-400">{"', '"}</span>
-                <span className="text-amber-300">Express</span>
+                <span className="text-amber-300">Express.js</span>
+                <span className="text-gray-400">{"', '"}</span>
+                <span className="text-amber-300">NestJS</span>
                 <span className="text-gray-400">{"', '"}</span>
                 <span className="text-amber-300">MongoDB</span>
+                <span className="text-gray-400">{"', '"}</span>
+                <span className="text-amber-300">MySQL</span>
+                <span className="text-gray-400">{"', '"}</span>
+                <span className="text-amber-300">TypeScript</span>
+                <span className="text-gray-400">{"', '"}</span>
+                <span className="text-amber-300">Tailwind CSS</span>
+                <span className="text-gray-400">{"', '"}</span>
+                <span className="text-amber-300">Redux Toolkit</span>
+                <span className="text-gray-400">{"', '"}</span>
+                <span className="text-amber-300">WebSockets</span>
+                <span className="text-gray-400">{"', '"}</span>
+                <span className="text-amber-300">Redis</span>
+                <span className="text-gray-400">{"', '"}</span>
+                <span className="text-amber-300">Firebase</span>
+                <span className="text-gray-400">{"', '"}</span>
+                <span className="text-amber-300">AWS</span>
+                <span className="text-gray-400">{"']"}</span>
               </div>
+
               <div>
                 <span className="ml-4 lg:ml-8 mr-2 text-[#e5e7eb]">
                   hardWorker:

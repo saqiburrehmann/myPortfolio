@@ -6,7 +6,7 @@ import mongoDB from "/public/svg/skills/mongoDB.svg";
 import react from "/public/svg/skills/react.svg";
 import tailwind from "/public/svg/skills/tailwind.svg";
 import typescript from "/public/svg/skills/typescript.svg";
-import nextjs from "/public/svg/skills/nextjs.svg";
+import nextjs from "/public/svg/skills/NextJS.png";
 import redux from "/public/svg/skills/redux.webp";
 import nodejs from "/public/svg/skills/nodejs.png";
 import express from "/public/svg/skills/express.png";

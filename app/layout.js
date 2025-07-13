@@ -19,7 +19,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/profile.JPG" sizes="any" />
+        <link rel="icon" href="/my_pic.png" sizes="any" />
       </head>
       <body className={inter.className}>
         <ToastContainer />
